@@ -32,17 +32,18 @@ if choice == 'Explore and Analysis your data':
 if choice == 'Train moodel':
     st.title('AutoML Training')
     target = st.selectbox("Select your target", df.columns)
-    setup(df, target=target, silent=True)
-    setup_df = pull()
-    st.info('Settings for the AutoML experiment')
-    st.dataframe(setup_df)
-    best_model = compare_models()
-    compare_df = pull()
-    st.info("Results")
-    st.dataframe(compare_df)
-    st.info('The best model')
-    best_model
-    save_model(best_model, 'best_model')
+    if st.button('Start train'):
+        setup(df, target=target, silent=True)
+        setup_df = pull()
+        st.info('Settings for the AutoML experiment')
+        st.dataframe(setup_df)
+        best_model = compare_models()
+        compare_df = pull()
+        st.info("Results")
+        st.dataframe(compare_df)
+        st.info('The best model')
+        best_model
+        save_model(best_model, 'best_model')
     
 if choice == 'Get model':
     st.title('Download the model trained')
