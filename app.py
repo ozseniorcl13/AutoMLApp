@@ -1,6 +1,14 @@
 import streamlit as st
 import pandas as pd
 
+import pandas_profiling
+from streamlit_pandas_profiling import st_profile_report
+
+import os
+
+if os.path.exists('source_data.csv'):
+    df = pd.read_csv('source_data.csv', index_col = None)
+
 with st.sidebar:
     st.title('Auto ML App')
     choice = st.radio('Navigation', ['Upload dataset', 'Explore and Analysis your data', 'Train moodel', 'Get model'])
@@ -13,3 +21,9 @@ if choice == 'Upload dataset':
         df = pd.read_csv(file, index_col = None)
         df.to_csv("source_data.csv", index = None)
         st.dataframe(df)
+        
+if choice == 'Explore and Analysis your data':
+    st.title('Explore your data and get insights')
+    profile_report = df.profile_report()
+    st_profile_report(profile_report)
+    
