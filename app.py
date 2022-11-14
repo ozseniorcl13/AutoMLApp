@@ -6,6 +6,8 @@ from streamlit_pandas_profiling import st_profile_report
 
 import os
 
+from pycaret.classification import setup, compare_models, pull, save_model
+
 if os.path.exists('source_data.csv'):
     df = pd.read_csv('source_data.csv', index_col = None)
 
@@ -27,3 +29,16 @@ if choice == 'Explore and Analysis your data':
     profile_report = df.profile_report()
     st_profile_report(profile_report)
     
+if choice == 'Train moodel':
+    st.title('AutoML Training')
+    target = st.selectbox("Select your target", df.columns)
+    setup(df, target=target, silent=True)
+    setup_df = pull()
+    st.info('Settings for the AutoML experiment')
+    st.dataframe(setup_df)
+    best_model = compare_models()
+    compare_df = pull()
+    st.info("Results")
+    st.dataframe(compare_df)
+    st.info('The best model')
+    best_model
