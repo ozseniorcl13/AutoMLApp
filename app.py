@@ -42,3 +42,9 @@ if choice == 'Train moodel':
     st.dataframe(compare_df)
     st.info('The best model')
     best_model
+    save_model(best_model, 'best_model')
+    
+if choice == 'Get model':
+    st.title('Download the model trained')
+    with open('best_model.pkl', 'rb') as f:
+        st.download_button('Download model', f, file_name = 'best_model.pkl')
