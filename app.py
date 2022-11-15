@@ -38,7 +38,7 @@ if choice == 'Train moodel':
     
     features = {}
     for c in columns:
-        features[c] = st.checkbox(c)
+        features[c] = st.checkbox(c, value = True)   
     
     columns_train = [k for k, v in features.items() if features[k]]
     
