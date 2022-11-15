@@ -32,16 +32,33 @@ if choice == 'Explore and Analysis your data':
 if choice == 'Train moodel':
     st.title('AutoML Training')
     target = st.selectbox("Select your target", df.columns)
+
+    st.caption('Select features for training')    
+    columns = df.columns.difference([target])
+    
+    features = {}
+    for c in columns:
+        features[c] = st.checkbox(c)
+    
+    columns_train = [k for k, v in features.items() if features[k]]
+    
+    columns_train.append(target)
+    
+    st.caption('Features and target')
+    if len(columns_train) != 1:
+        st.dataframe(df[columns_train].head())
+    
     if st.button('Start train'):
-        setup(df, target=target, silent=True)
+        
+        setup(df[columns_train], target=target, silent=True)
         setup_df = pull()
-        st.info('Settings for the AutoML experiment')
+        st.caption('Settings for the AutoML experiment')
         st.dataframe(setup_df)
         best_model = compare_models()
         compare_df = pull()
-        st.info("Results")
+        st.caption("Results")
         st.dataframe(compare_df)
-        st.info('The best model')
+        st.caption('The best model')
         best_model
         save_model(best_model, 'best_model')
     
