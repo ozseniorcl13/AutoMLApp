@@ -26,8 +26,10 @@ if choice == 'Upload dataset':
         
 if choice == 'Explore and Analysis your data':
     st.title('Explore your data and get insights')
-    profile_report = df.profile_report()
-    st_profile_report(profile_report)
+    
+    if st.button('Start analysis'):
+        profile_report = df.profile_report()
+        st_profile_report(profile_report)
     
 if choice == 'Train moodel':
     st.title('AutoML Training')
