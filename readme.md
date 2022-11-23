@@ -41,7 +41,7 @@ Access in your browser: http://localhost:5000
 ```
 
 ## To do
-[] - Select the type of analyse (minimal ou complete)
-[] - Select setup configuration for training
-[] - Add support for regression problems
-[] - Export the results of training
+* Select the type of analyse (minimal ou complete)
+* Select setup configuration for training
+* Add support for regression problems
+* Export the results of training
